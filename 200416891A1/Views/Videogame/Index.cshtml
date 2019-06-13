@@ -1,0 +1,30 @@
+﻿@model List<_200416891A1.Models.Videogame>
+
+@{
+    ViewBag.Title = "Videogame List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Videogames</h2>
+@Html.ActionLink("Create", "Create")
+
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Details</th>
+    </tr>
+
+    @foreach (var videogame in Model)
+    {
+        <tr>
+            <td>@videogame.ID</td>
+            <td>@videogame.Name</td>
+            <td>$ @videogame.Price.ToString("N2")</td>
+            <td>@Html.ActionLink("Details", "Details", new { id = videogame.ID })</td>
+        </tr>
+    }
+
+</table>
+
