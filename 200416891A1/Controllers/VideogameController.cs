@@ -12,13 +12,13 @@ namespace _200416891A1.Controllers
         List<Videogame> videogamesList = new List<Videogame>()
     {
             //Insert Videogames
-            new Videogame {Name ="Fornite", Description = "Battle Royale", ID = 1,Genres = new Genre{Name = "Action", Description = "" },
+            new Videogame() {Name ="Fornite", Description = "Battle Royale", ID = 1,Genres = new Genre{Name = "Action", Description = "" },
                 Reviews = new Review{Name = "Carlos", Stars = 5, Subject = "Free 2 Play", ReviewDescription = "Can't believe this awesome game is free!"}
                 , Price = 0.00, Developers = new Developer{ Name = "Epic Games", Website ="epicgames.com" }, MinimumRequirements ="Xbox," +
                 "PS4, Nintendo Switch, iOS, Android, Pc",
                 Publishers = new Publisher{ Name = "Epic Games", Website = "epicgames.com" } },
 
-            new Videogame {Name ="Fifa 19", Description = "Soccer Simulation", ID = 2,Genres = new Genre{Name = "Sports", Description = "Simulation for soccer with multiple game modes" },
+            new Videogame() {Name ="Fifa 19", Description = "Soccer Simulation", ID = 2,Genres = new Genre{Name = "Sports", Description = "Simulation for soccer with multiple game modes" },
                 Reviews = new Review{Name = "Steve", Stars = 2, Subject = "Same thing as last year", ReviewDescription = "This is the exact same things from last year. Do Something!!"}
                 , Price = 0.00, Developers = new Developer{ Name = "EA Vancouver Studios", Website ="ea.com" }, MinimumRequirements ="Xbox, " +
                 "PS4, Nintendo Switch, Pc",
@@ -49,6 +49,22 @@ namespace _200416891A1.Controllers
             return View();
         }
 
+        public ActionResult Edit(int ID)
+        {
+            var vg = videogamesList.Where(v => v.ID == ID).FirstOrDefault();
+            return View(vg);
+        }
+
+        [HttpPost]
+        public ActionResult Edit( Videogame vg)
+        {
+            var Name = vg.Name;
+            var Price = vg.Price;
+            var Description = vg.Description;
+            var MRequirements = vg.MinimumRequirements;
+
+            return RedirectToAction("Index");
+        }
 
     }
 }
